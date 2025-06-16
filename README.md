@@ -17,7 +17,6 @@ I performed hourly resampling to reduce granularity and computational load.
 
 - Parsed and combined `Date` and `Time` into a `datetime` index
 - Converted numeric columns from strings and replaced `'?'` with NaNs
-- Aggregated data using hourly means
 - Imputed missing values using forward fill
 
 ## Exploratory Analysis
