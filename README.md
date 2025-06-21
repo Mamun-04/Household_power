@@ -1,56 +1,37 @@
+# Household Power Consumption Forecasting
+
+## Project Overview
+This project analyzes the "Household Power Consumption" dataset to forecast electricity usage, specifically the *Global Active Power*, using time series forecasting and machine learning techniques. The goal is to predict power consumption for the next hour based on historical data.
+
+## Dataset
+The dataset contains measurements of electric power consumption in one household with a one-minute sampling rate over several years. It includes variables like:
+
+- Global_active_power
+- Global_reactive_power
+- Voltage
+- Global_intensity
+- Sub_metering_1, 2, 3
+
+Source: [UCI Machine Learning Repository](https://archive.ics.uci.edu/ml/datasets/individual+household+electric+power+consumption)
+
+## Data Cleaning and Preprocessing
+- Loaded data from CSV with proper separator (`;`).
+- Handled missing values by converting '?' to NaN and filling numeric columns with their mean.
+- Converted date and time columns to a datetime index.
+- Resampled data to hourly frequency by taking the mean.
+- Dropped remaining missing values after conversion.
+
+## Modeling Approaches
+1. **Random Forest Regression**
+   - Features: past hourly measurements of power consumption and other variables.
+   - Target: next hour's Global Active Power.
+   - Split data chronologically into train (80%) and test (20%).
+   - Evaluated with MAE and RMSE.
+
+2. **Prophet Time Series Forecasting**
+   - Forecasted next 24 hours of Global Active Power.
+   - Used Prophet for automatic trend and seasonality modeling.
 
 
-This project uses the **UCI Household Power Consumption Dataset** to forecast short-term energy usage. The goal is to predict the `Global_active_power` (in kilowatts) using historical consumption and environmental features like voltage and sub-metering values.
-
-- Source: UCI Machine Learning Repository  
-- File: `household_power_consumption.txt`  
-- Size was rduced to decrease stress of computation
-- Features:
-  - `Date` and `Time`: Combined into a datetime index
-  - `Global_active_power`: Target variable (in kilowatts)
-  - `Global_reactive_power`, `Voltage`, `Global_intensity`
-  - `Sub_metering_1`, `Sub_metering_2`, `Sub_metering_3`
-
-I performed hourly resampling to reduce granularity and computational load.
-
-## Data Cleaning
-
-- Parsed and combined `Date` and `Time` into a `datetime` index
-- Converted numeric columns from strings and replaced `'?'` with NaNs
-- Imputed missing values using forward fill
-
-## Exploratory Analysis
-
-Basic EDA was done to examine:
-- Distribution of `Global_active_power`
-- Trends in voltage and sub-metering across time
-- Seasonality using resampling (daily/monthly)
-
-## Model
-
-Used a **Random Forest Regressor** to predict `Global_active_power` using other features.
-
-### Features Used:
-- `Global_reactive_power`
-- `Voltage`
-- `Global_intensity`
-- `Sub_metering_1`
-- `Sub_metering_2`
-- `Sub_metering_3`
-
-### Evaluation Metrics:
-
-| Metric | Value |
-|--------|--------|
-| **MAE** (Mean Absolute Error) | `0.5381` kW |
-| **RMSE** (Root Mean Squared Error) | `0.7401` kW |
-
-These values suggest the model can predict average hourly power usage with reasonable accuracy, considering the typical household usage patterns.
-
-## 📈 Results
-
-- Plotted feature importances from the Random Forest model
-- Visualized predicted vs actual energy usage
-- Predicted trend followed the actual trend very closely suggesting that the model is accurate
 
 
